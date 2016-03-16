@@ -26,6 +26,9 @@
     <profiles>
         <profile>
             <id>lucene</id>
+            <properties>
+                <env>lucene</env>
+            </properties>
             <dependencies>
                 <dependency>
                     <groupId>${project.parent.groupId}</groupId>
@@ -39,6 +42,9 @@
         </profile>
         <profile>
             <id>mysql</id>
+            <properties>
+                <env>mysql</env>
+            </properties>
             <dependencies>
                 <dependency>
                     <groupId>${project.parent.groupId}</groupId>
@@ -49,6 +55,9 @@
         </profile>
         <profile>
             <id>mongodb</id>
+            <properties>
+                <env>mongodb</env>
+            </properties>
             <dependencies>
                 <dependency>
                     <groupId>${project.parent.groupId}</groupId>
@@ -58,5 +67,58 @@
             </dependencies>
         </profile>
     </profiles>
+    <build>
+        <finalName>dubbokeeper-server</finalName>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <configuration>
+                    <archive>
+                        <manifest>
+                            <addClasspath>true</addClasspath>
+                            <classpathPrefix>lib/</classpathPrefix>
+                            <mainClass>com.dubboclub.dk.server.Main</mainClass>
+                        </manifest>
+                    </archive>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-dependency-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>copy-dependencies</id>
+                        <!-- bind to the packaging phase -->
+                        <phase>package</phase>
+                        <goals>
+                            <goal>copy-dependencies</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <outputDirectory>${project.build.directory}/lib</outputDirectory>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>2.3.2</version>
+                <configuration>
+                    <encoding>UTF-8</encoding>
+                    <source>1.7</source>
+                    <target>1.7</target>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <configuration>
+                    <skip>true</skip>
+                </configuration>
+            </plugin>
+        </plugins>
+
+    </build>
 
 </project>
