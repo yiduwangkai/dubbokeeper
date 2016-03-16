@@ -88,6 +88,7 @@ monitor.log.home=/usr/dev/op_disk/monitor-log
 `conf`:存储端的相关配置，具体配置下面会介绍<br>
 
 `lib`:应用依赖的相关jar包<br>
+注：这里的lib包是在dubbokeeper-server目录下面
 
 
 下面列出不同存储的对配置的相关描述
